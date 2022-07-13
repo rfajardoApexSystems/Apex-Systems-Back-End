@@ -1,36 +1,21 @@
-﻿using BackEndAssignment.Interfaces.Repositories;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndAssignment.Controllers
 {
-    public class AuthorsControllers : BaseApiController
+    public class BooksController : BaseApiController
     {
-
-
-        private readonly IAuthorsRepository _authorsRepository;
-        private readonly IUnitOfWork _unitOfWork;
-
-        public AuthorsControllers(IAuthorsRepository authorsRepository, IUnitOfWork unitOfWork)
-        {
-            _authorsRepository = authorsRepository;
-            _unitOfWork = unitOfWork;
-        }
-
-
         /*
          * TODO:
             - Complete the endpoints funcionality to handle all the requests.
             - Inject the neccesary services.
          */
 
-
         // GET: api/<AuthorsController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IEnumerable<string> Get()
         {
-            var list = await _authorsRepository.GetAllAuthors();
-            
-            return Ok(list);
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/<AuthorsController>/5
@@ -42,10 +27,8 @@ namespace BackEndAssignment.Controllers
 
         // POST api/<AuthorsController>
         [HttpPost]
-        public async void Post([FromBody] string name )
+        public void Post([FromBody] string value)
         {
-            await _authorsRepository.AddAuthor(name, DateTime.Now);
-            await _unitOfWork.Commit(new CancellationToken());
         }
 
         // PUT api/<AuthorsController>/5

@@ -13,7 +13,10 @@ namespace BackEndAssignment.Extensions
 
         public static void ErrorHandlingMiddleware(this IApplicationBuilder app)
         {
-            app.UseMiddleware<ExceptionHandlerMiddleware>();
+            /*
+             Extra Points: Use a middleware to handle all the requests and the exceptions if any.
+             */
+            //app.UseMiddleware<ExceptionHandlerMiddleware>();
         }
 
         public static void BaseRunningExtension(this IApplicationBuilder app)

@@ -1,6 +1,9 @@
 ﻿using BackEndAssignment.Context;
+using BackEndAssignment.Interfaces.Repositories;
+using BackEndAssignment.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.OpenApi.Models;
 
 namespace BackEndAssignment.Extensions
@@ -19,10 +22,13 @@ namespace BackEndAssignment.Extensions
             });
         }
 
+
+
+
         internal static void AddEntityFramework(IServiceCollection services)
         {
             //Read the connection db from the appsettings.
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer());
+            services.AddDbContext<ApplicationDbContext>();
         }
 
         public static void AddBaseServiceExtension(this IServiceCollection services)
@@ -39,6 +45,21 @@ namespace BackEndAssignment.Extensions
                 config.AssumeDefaultVersionWhenUnspecified = true;
                 config.ReportApiVersions = true;
             });
+        }
+
+
+        public static void AddRepositoriesExtension(this IServiceCollection services)
+        {
+            services.AddTransient(typeof(IBaseRepositoryAsync<>), typeof(BaseRepositoryAsync<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IAuthorsRepository, AuthorsRepository>();
+
+            /*
+             TODO:
+                - Add your individual repositories to use them as DI
+             */
+
+
         }
     }
 }

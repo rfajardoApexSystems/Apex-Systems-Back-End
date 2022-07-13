@@ -1,13 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BackEndAssignment.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackEndAssignment.Context
 {
     public class ApplicationDbContext : DbContext
     {
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public ApplicationDbContext()
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
+            optionsBuilder.UseSqlite(@"DataSource=mydatabase.db;");
         }
+
+
+        #region DB Sets
+
+        public DbSet<Author> Authors { get; set; }
+
+        #endregion
     }
 }
