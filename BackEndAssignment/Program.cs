@@ -9,6 +9,7 @@ ServiceExtensions.AddSwaggerExtension(builder.Services);
 ServiceExtensions.AddBaseServiceExtension(builder.Services);
 ServiceExtensions.AddApiVersioningExtension(builder.Services);
 ServiceExtensions.AddEntityFramework(builder.Services);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

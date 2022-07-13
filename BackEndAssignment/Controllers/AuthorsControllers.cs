@@ -2,7 +2,7 @@
 
 namespace BackEndAssignment.Controllers
 {
-    public class AuthorsControllers : Controller
+    public class AuthorsControllers : BaseApiController
     {
         // GET: api/<AuthorsController>
         [HttpGet]
