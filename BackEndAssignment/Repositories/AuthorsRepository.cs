@@ -32,6 +32,8 @@ namespace BackEndAssignment.Repositories
         public async Task<List<Author>> GetAllAuthors()
         {
             return await authorsRepository.GetAllAsync();
+
+            return null;
         }
 
 
