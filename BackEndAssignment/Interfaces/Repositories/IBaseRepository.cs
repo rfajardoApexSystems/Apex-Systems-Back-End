@@ -1,4 +1,6 @@
-﻿namespace BackEndAssignment.Interfaces.Repositories
+﻿using Microsoft.Data.SqlClient;
+
+namespace BackEndAssignment.Interfaces.Repositories
 {
     public interface IBaseRepositoryAsync<TEntity> where TEntity : class
     {
@@ -13,6 +15,8 @@
         Task UpdateAsync(TEntity entity);
 
         Task DeleteAsync(TEntity entity);
+
+        Task<List<TEntity>> ExecuteQueryAsync(string query, List<SqlParameter> sqlParameters);
     
 
     }

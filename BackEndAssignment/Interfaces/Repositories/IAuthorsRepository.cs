@@ -1,4 +1,5 @@
 ﻿using BackEndAssignment.Models;
+using Microsoft.Data.SqlClient;
 
 namespace BackEndAssignment.Interfaces.Repositories
 {
@@ -7,6 +8,8 @@ namespace BackEndAssignment.Interfaces.Repositories
 
         Task<List<Author>> GetAuthorsByBirthDate(string date);
         Task<List<Author>> GetAllAuthors();
+
+        Task<List<Author>> GetAllAuthorsRawSql();
 
         Task<int> AddAuthor(string name, DateTime birthDate);
     }

@@ -1,5 +1,6 @@
 ﻿using BackEndAssignment.Interfaces.Repositories;
 using BackEndAssignment.Models;
+using Microsoft.Data.SqlClient;
 
 namespace BackEndAssignment.Repositories
 {
@@ -42,6 +43,12 @@ namespace BackEndAssignment.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<List<Author>> GetAllAuthorsRawSql()
+        {
+            var query = "SELECT * FROM Authors";
+            var sqlParameters = new List<SqlParameter>();
 
+            return await authorsRepository.(query, sqlParameters);
+        }
     }
 }

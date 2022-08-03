@@ -28,11 +28,17 @@ namespace BackEndAssignment.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var list = await _authorsRepository.GetAllAuthors();
+            var list = await _authorsRepository.GetAllAuthorsRawSql();
+
+
             
             return Ok(list);
         }
 
+
+
+
+        
         // GET api/<AuthorsController>/5
         [HttpGet("{id}")]
         public string Get(int id)

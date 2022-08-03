@@ -1,6 +1,8 @@
 ﻿using BackEndAssignment.Context;
 using BackEndAssignment.Interfaces.Repositories;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BackEndAssignment.Repositories
 {
@@ -27,6 +29,11 @@ namespace BackEndAssignment.Repositories
             return Task.CompletedTask;
         }
 
+
+        public async Task<List<T>> GetFiltered(Expression<Func<T, bool>> expression)
+        {
+            return await _dbContext.Set<T>().Where(expression).ToListAsync();
+        }
         public async Task<List<T>> GetAllAsync()
         {
             return await _dbContext
@@ -49,10 +56,18 @@ namespace BackEndAssignment.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<T>> ExecuteQueryAsync(string query, List<SqlParameter> sqlParameters)
+        {
+            return await _dbContext.Set<T>().FromSqlRaw(query, sqlParameters).ToListAsync();
+        }
+
         public Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).CurrentValues.SetValues(entity);
             return Task.CompletedTask;
         }
+
+
+
     }
 }
